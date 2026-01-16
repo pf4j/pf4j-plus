@@ -38,6 +38,9 @@ public class DefaultConfigService implements ConfigService {
 
     private final ConfigPersister persister;
     private final ConcurrentMap<String, DefaultPluginConfig> configs;
+
+    // Volatile is sufficient here: only simple read/write operations on a reference, no compound actions
+    @SuppressWarnings("java:S3077")
     private volatile ConfigChangeListener changeListener;
 
     public DefaultConfigService(ConfigPersister persister) {
