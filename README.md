@@ -4,18 +4,72 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pf4j_pf4j-plus&metric=coverage)](https://sonarcloud.io/summary/overall?id=pf4j_pf4j-plus)
 [![Maven Central](http://img.shields.io/maven-central/v/org.pf4j.plus/pf4j-plus.svg)](http://search.maven.org/#search|ga|1|pf4j-plus)
 
-PF4J-Plus is a lightweight toolkit that provides common platform-level services for applications built on [PF4J](https://github.com/pf4j/pf4j).
+**The missing platform layer for PF4J applications.**
 
-It solves recurring problems in plugin-based applications:
-- How do plugins access shared services?
-- How do plugins communicate without tight coupling?
-- How do plugins manage their configuration?
-- How do plugins know their own identity?
+PF4J handles plugin loading and extension points. But plugins need more: shared services, configuration, inter-plugin communication, and access to their own metadata. Without a standard approach, you end up writing custom `PluginFactory` and `ExtensionFactory` implementations in every project—wiring that has nothing to do with your domain.
 
-PF4J-Plus is **not** a framework. It does not replace Spring, CDI, or enterprise stacks.
-It keeps control in the host application while reducing boilerplate in plugins.
+PF4J-Plus provides these building blocks so you can focus on your application logic.
 
 > **Note:** This project is in early development. APIs may change between versions until a stable release.
+
+## Before / After
+
+**Without PF4J-Plus** — custom factories for each project ([common pattern](https://github.com/pf4j/pf4j/issues/319)):
+
+```java
+// Custom plugin base class with setters for each service
+public abstract class MyPlugin extends Plugin {
+    protected GreetingService greetingService;
+    protected EventBus eventBus;
+
+    public void setGreetingService(GreetingService s) { this.greetingService = s; }
+    public void setEventBus(EventBus e) { this.eventBus = e; }
+}
+
+// Custom factory to inject services
+public class MyPluginFactory extends DefaultPluginFactory {
+    @Override
+    public Plugin create(PluginWrapper pluginWrapper) {
+        Plugin plugin = super.create(pluginWrapper);
+        if (plugin instanceof MyPlugin) {
+            ((MyPlugin) plugin).setGreetingService(Application.getGreetingService());
+            ((MyPlugin) plugin).setEventBus(Application.getEventBus());
+        }
+        return plugin;
+    }
+}
+
+// Custom manager to use your factory
+public class MyPluginManager extends DefaultPluginManager {
+    @Override
+    protected PluginFactory createPluginFactory() {
+        return new MyPluginFactory();
+    }
+}
+// ... and similar boilerplate for ExtensionFactory if extensions need services
+```
+
+**With PF4J-Plus** — declare services, get wiring for free:
+
+```java
+PluginManager pluginManager = PlusPluginManagerBuilder.create()
+    .serviceRegistry(registry -> {
+        registry.register(GreetingService.class, new DefaultGreetingService());
+        registry.register(EventBus.class, new DefaultEventBus());
+    })
+    .build();
+```
+
+Plugins implement `ServiceRegistryAware` to receive services automatically. Extensions use `@Inject` for field injection. No custom factories required.
+
+---
+
+**What PF4J-Plus is NOT:**
+- Not a DI container (no scopes, no AOP, no dependency graphs)
+- Not a framework (no opinions about your architecture)
+- Not a replacement for Spring/CDI (use those if you need their features)
+
+It's just the platform wiring that every PF4J application rebuilds. Standardized.
 
 ## Components
 
