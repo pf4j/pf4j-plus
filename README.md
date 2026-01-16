@@ -1,5 +1,9 @@
 # PF4J-Plus
 
+[![GitHub Actions Status](https://github.com/pf4j/pf4j-plus/actions/workflows/build.yml/badge.svg)](https://github.com/pf4j/pf4j-plus/actions/workflows/build.yml)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pf4j_pf4j-plus&metric=coverage)](https://sonarcloud.io/summary/overall?id=pf4j_pf4j-plus)
+[![Maven Central](http://img.shields.io/maven-central/v/org.pf4j.plus/pf4j-plus.svg)](http://search.maven.org/#search|ga|1|pf4j-plus)
+
 PF4J-Plus is a lightweight toolkit that provides common platform-level services for applications built on [PF4J](https://github.com/pf4j/pf4j).
 
 It solves recurring problems in plugin-based applications:
