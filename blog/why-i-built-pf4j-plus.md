@@ -7,7 +7,7 @@ tags: java, pf4j, plugins, architecture
 
 # Why I Built pf4j-plus
 
-Years ago, I created [PF4J](https://github.com/pf4j/pf4j), a lightweight plugin framework for Java. It now has over 2,600 stars and is used by [companies worldwide](https://github.com/pf4j/pf4j#projects-using-pf4j). After maintaining it for years, I started noticing patterns in the GitHub issues. The same three problems kept appearing, and I finally hit them myself.
+Years ago, I created [PF4J](https://github.com/pf4j/pf4j), a lightweight plugin framework for Java. It now has over 2,600 stars and is used by [companies worldwide](https://github.com/pf4j/pf4j#trusted-by). After maintaining it for years, I started noticing patterns in the GitHub issues. The same three problems kept appearing, and I finally hit them myself.
 
 ## The Pattern
 
@@ -43,7 +43,7 @@ vt4j will be open-sourced soon—it's the first real-world user of pf4j-plus.
 
 ## The Solution
 
-So I built [pf4j-plus](https://github.com/pf4j/pf4j-plus): ServiceRegistry for shared services, EventBus for decoupled communication, ConfigService for plugin configuration. 
+So I built [pf4j-plus](https://github.com/pf4j/pf4j-plus): `ServiceRegistry` for shared services, `EventBus` for decoupled communication, `ConfigService` for plugin configuration. 
 
 It's a lightweight toolkit, not a framework. It standardizes the platform layer that teams end up building anyway—especially useful if you're not using Spring. Desktop apps, CLI tools, embedded systems, anywhere a full enterprise stack feels like overkill.
 
