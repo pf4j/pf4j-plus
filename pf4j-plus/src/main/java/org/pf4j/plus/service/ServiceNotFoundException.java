@@ -1,0 +1,44 @@
+/*
+ * Copyright (C) 2025-present the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.pf4j.plus.service;
+
+/**
+ * Thrown when a required service is not found in the registry.
+ * <p>
+ * This exception is thrown by {@link ServiceRegistry#require(Class)} when
+ * a service is expected to exist but is not registered.
+ *
+ * @author Decebal Suiu
+ */
+public class ServiceNotFoundException extends RuntimeException {
+
+    private final Class<?> serviceType;
+
+    public ServiceNotFoundException(Class<?> serviceType) {
+        super("Service not found: " + serviceType.getName());
+        this.serviceType = serviceType;
+    }
+
+    public ServiceNotFoundException(Class<?> serviceType, String message) {
+        super(message);
+        this.serviceType = serviceType;
+    }
+
+    public Class<?> getServiceType() {
+        return serviceType;
+    }
+
+}

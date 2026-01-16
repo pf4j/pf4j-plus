@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>org.pf4j.plus</groupId>
+        <artifactId>pf4j-plus-parent</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>pf4j-plus-demo</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>PF4J-Plus Demo</name>
+    <description>Demo application showing PF4J-Plus features</description>
+
+    <modules>
+        <module>app</module>
+        <module>plugins/greeting-plugin</module>
+        <module>plugins/welcome-plugin</module>
+    </modules>
+
+</project>
