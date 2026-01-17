@@ -31,7 +31,7 @@ The architecture is plugin-based: a core that handles video playback and navigat
 
 PF4J was perfect for loading plugins. But then I hit all three problems:
 
-**EventBus:** When a user trims a video, all plugins need to recalculate their data. When someone toggles the annotation plugin off, the UI needs to reflow. When video plays or pauses, plugins need to sync. Without a proper event system, this becomes a tight coupling nightmare.
+**EventBus:** When a user trims a video, all plugins need to recalculate their data. When someone toggles the annotation plugin off, the UI needs to reflow. When video plays or pauses, plugins need to sync. Without a standard event system, coordinating all this leads to tight coupling between plugins.
 
 **Service access:** The ML plugin needs a settings service to choose between different detection models. Multiple plugins need access to the video service. I was writing custom PluginFactory code everywhere—the same boilerplate I'd seen in dozens of GitHub issues.
 
